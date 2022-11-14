@@ -1,8 +1,10 @@
 
 const monBouton = document.querySelector("#fetchAll")
 const monBoutonSearch = document.querySelector("#triggerSearch")
+const monBoutonSearchByLanguage = document.querySelector("#triggerSearchByLanguage")
 const countryContainer = document.querySelector(".lesPays")
 const searchField = document.querySelector("#search")
+const searchByLanguageField = document.querySelector("#searchByLanguage")
 
 monBouton.addEventListener("click", ()=>{
     clearContainer()
@@ -11,6 +13,9 @@ monBouton.addEventListener("click", ()=>{
 monBoutonSearch.addEventListener("click", ()=>{
     clearContainer()
     fetchOne(searchField.value)
+})
+monBoutonSearchByLanguage.addEventListener("click", ()=>{
+    fetchAllByLanguage(searchByLanguageField.value)
 })
 
 function fetchAll(){
@@ -42,6 +47,21 @@ function fetchOne(countryName){
 
 
             addCountryPreciseTemplate(country)
+        })
+}
+
+function fetchAllByLanguage(language){
+
+    let url =`https://restcountries.com/v3.1/lang/${language}`
+    fetch(url)
+        .then(response=>response.json())
+        .then(data=>{
+
+            clearContainer()
+            data.forEach(country=>{
+
+                addCountryTemplate(country)
+            })
         })
 }
 
@@ -100,3 +120,4 @@ function addCountryPreciseTemplate(country){
 function clearContainer(){
     document.querySelector(".lesPays").innerHTML = ""
 }
+
