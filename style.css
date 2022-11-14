@@ -1,0 +1,7 @@
+.countryDiv{
+    display: flex;
+}
+
+.clickable{
+    cursor: pointer;
+}
